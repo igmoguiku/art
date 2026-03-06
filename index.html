@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGUMO｜粋雲</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" href="images/icon.png" sizes="any">
+<link rel="apple-touch-icon" href="images/favicon.png">
+<button id="topBtn">↑</button>
+<style>
+
+/* ===== 全体 ===== */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  color: white;
+  background: url("images/bg.png") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* ===== 横幅制限コンテナ ===== */
+.container {
+  max-width: 900px;   /* ← ここで止まる */
+  margin: 0 auto;
+}
+
+/* ===== ガラス風コンテナ共通 ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+/* ===== About me ===== */
+.profile {
+  text-align: center;
+  padding: 50px 20px 30px;
+  margin: 40px 20px;
+}
+
+.profile h1 {
+  margin-bottom: 25px;
+  font-size: 28px;
+  letter-spacing: 2px;
+}
+
+.profile img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.6);
+  margin-bottom: 15px;
+}
+
+.profile h2 {
+  margin: 10px 0 8px;
+  font-size: 20px;
+}
+
+.profile p {
+  font-size: 14px;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.profile, .gallery {
+  transition: 0.3s;
+}
+
+.profile:hover, .gallery:hover {
+  transform: translateY(-5px);
+}
+
+/* ===== Xリンクボタン ===== */
+.x-link {
+  display: block;
+  width: fit-content;
+  margin: 20px auto 0;
+  padding: 8px 18px;
+  border-radius: 30px;
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.4);
+  transition: 0.3s;
+}
+
+.x-link:hover {
+  background: rgba(255,255,255,0.3);
+  transform: translateY(-2px);
+}
+
+/* ===== ギャラリーもガラス風に ===== */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 25px;
+  margin: 20px;
+}
+
+/* ===== ふわっと表示 ===== */
+.fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== ギャラリー（常に2列） ===== */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 20px;
+}
+
+/* 一覧では正方形表示 */
+.gallery img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.03);
+}
+
+/* ===== 作品ラッパー ===== */
+.work {
+  text-align: center;
+}
+
+.date {
+  margin-top: 6px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* ===== ライトボックス ===== */
+#lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#lightbox img {
+  max-width: 95%;
+  max-height: 95%;
+  object-fit: contain;
+}
+
+#close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+/* ===== スクロールトップボタン ===== */
+#topBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  display: none;
+  transition: 0.3s;
+  z-index: 999;
+}
+
+#topBtn:hover {
+  background: rgba(255,255,255,0.3);
+  transform: translateY(-3px);
+}
+
+/* ===== フィルターボタン ===== */
+.filter-buttons {
+  text-align: center;
+  margin: 20px;
+}
+
+.filter-buttons button {
+  margin: 5px;
+  padding: 6px 15px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.15);
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.filter-buttons button:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.filter-buttons button.active {
+  background: rgba(255,255,255,0.4);
+}
+
+/* ===== Informationブロック ===== */
+.info-block {
+  text-align: center;
+  padding: 40px 20px;
+  margin: 20px;
+}
+
+.info-block h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+.info-links a {
+  display: inline-block;
+  margin: 10px 15px;
+  padding: 8px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.15);
+  transition: 0.3s;
+}
+
+.info-links a:hover {
+  background: rgba(255,255,255,0.3);
+  transform: translateY(-2px);
+}
+
+</style>
+</head>
+
+<body oncontextmenu="return false;">
+
+<div class="container">
+
+<!-- ===== About me ===== -->
+<section class="profile glass fade">
+  <h1>About me</h1>
+  <img src="images/icon.png" alt="アイコン">
+  <h2>粋雲 兆</h2>
+  <p>
+    いぐも きざし<br>
+　　<a href="https://x.com/igmoguiku" target="_blank" rel="noopener" class="x-link">𝕏 </a>
+    <br><br>
+    イラストを描いたり歌うのが好きです。<br>
+    趣味は麻雀<br><br>
+  </p>
+</section>
+
+<!-- ===== Information ===== -->
+<section class="info-block glass fade">
+  <h2>Information</h2>
+  <div class="info-links">
+    <a href="terms.html">利用規約</a>
+    <a href="commission.html">ご依頼について</a>
+  </div>
+</section>
+
+<!-- ===== ギャラリー ===== -->
+<div class="filter-buttons">
+  <button data-filter="all" class="active">All</button>
+  <button data-filter="original">Original</button>
+  <button data-filter="fanart">FanArt</button>
+</div>
+<main class="gallery glass fade">
+
+ <div class="work original">
+  <img src="images/20260305.webp" alt="作品2">
+  <p class="date">2026.03.05</p>
+</div>
+
+<div class="work original">
+  <img src="images/20260302.webp" alt="作品1" loading="lazy">
+  <p class="date">2026.03.02</p>
+</div>
+
+</main>
+
+
+<!-- ===== ライトボックス ===== -->
+<div id="lightbox">
+  <span id="close">×</span>
+  <img id="lightbox-img">
+</div>
+
+<script>
+
+/* ===== スクロールでふわっと表示 ===== */
+const fadeElements = document.querySelectorAll(".fade");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+}, {
+  threshold: 0.1
+});
+
+fadeElements.forEach(el => observer.observe(el));
+
+
+const images = document.querySelectorAll(".gallery img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const closeBtn = document.getElementById("close");
+
+images.forEach(img => {
+  img.addEventListener("click", () => {
+    lightbox.style.display = "flex";
+    lightboxImg.src = img.src;
+  });
+});
+
+closeBtn.addEventListener("click", () => {
+  lightbox.style.display = "none";
+});
+
+lightbox.addEventListener("click", (e) => {
+  if (e.target !== lightboxImg) {
+    lightbox.style.display = "none";
+  }
+});
+
+/* ===== スクロールトップ ===== */
+const topBtn = document.getElementById("topBtn");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    topBtn.style.display = "block";
+  } else {
+    topBtn.style.display = "none";
+  }
+});
+
+topBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+
+/* ===== フィルター機能 ===== */
+const buttons = document.querySelectorAll(".filter-buttons button");
+const works = document.querySelectorAll(".work");
+
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+
+    // active切り替え
+    buttons.forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+
+    const filter = button.dataset.filter;
+
+    works.forEach(work => {
+      if (filter === "all") {
+        work.style.display = "block";
+      } else {
+        if (work.classList.contains(filter)) {
+          work.style.display = "block";
+        } else {
+          work.style.display = "none";
+        }
+      }
+    });
+
+  });
+});
+
+</script>
+
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" href="images/icon.png" sizes="any">
+<link rel="apple-touch-icon" href="images/icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ご依頼について</title>
+
+<style>
+
+/* ===== 全体 ===== */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  color: white;
+  background: url("images/bg.png") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* ===== 横幅制限 ===== */
+.container {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+/* ===== ガラスブロック ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  padding: 40px;
+}
+
+/* ===== 見出し ===== */
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+}
+
+h2 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+/* ===== 本文 ===== */
+p {
+  line-height: 1.8;
+  margin-bottom: 15px;
+}
+
+/* ===== 戻るリンク ===== */
+.back {
+  display: block;
+  text-align: center;
+  margin-top: 40px;
+  text-decoration: none;
+  color: white;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.back:hover {
+  opacity: 1;
+}
+
+/* ===== 受付状況 ===== */
+.status-box {
+  margin: 15px 0 25px;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+/* 受付中 */
+.status-box.open {
+  background: rgba(100, 255, 150, 0.2);
+  border: 1px solid rgba(100, 255, 150, 0.5);
+}
+
+/* 停止中 */
+.status-box.closed {
+  background: rgba(255, 100, 100, 0.2);
+  border: 1px solid rgba(255, 100, 100, 0.5);
+}
+
+/* 残りわずか */
+.status-box.limited {
+  background: rgba(255, 200, 100, 0.2);
+  border: 1px solid rgba(255, 200, 100, 0.5);
+}
+
+
+/* ===== 料金表 ===== */
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.price-table th,
+.price-table td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.price-table th {
+  background: rgba(255,255,255,0.15);
+  font-weight: normal;
+}
+
+.price-table tr:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div class="container">
+  <div class="glass">
+    <h1>ご依頼について</h1>
+
+<div class="status-box open">
+  現在の受付状況：受付中
+</div>
+
+<h2>｜料金表｜</h2>
+
+<table class="price-table">
+  <tr>
+    <th>内容</th>
+    <th>料金</th>
+    <th>納品目安</th>
+  </tr>
+  <tr>
+    <td>アイコン</td>
+    <td>1000円〜</td>
+    <td>3週間</td>
+  </tr>
+  <tr>
+    <td>バストアップ</td>
+    <td>2500円〜</td>
+    <td>1ヶ月</td>
+  </tr>
+  <tr>
+    <td>歌ってみたのサムネイル</td>
+    <td>2500円〜</td>
+    <td>2ヶ月</td>
+  </tr>
+  <tr>
+    <td>全身立ち絵</td>
+    <td>4000円〜</td>
+    <td>3ヶ月</td>
+  </tr>
+</table>
+
+<p>※その他の依頼内容の場合はご相談ください。</p>
+<p>※内容により料金は変動します。</p>
+<ul>
+      <li>表情差分：+500円</li>
+      <li>小物追加：+500円</li>
+      <li>複雑な背景はお断りさせていただく場合があります</li>
+    </ul>
+
+<h2>｜お支払い方法｜</h2>
+
+<div class="payment-box">
+  <div class="payment-methods">
+    <span>PayPayのみ</span>
+  </div>
+
+  <p class="note">
+    ※納品後、2日以内のお支払いをお願いしております。
+  </p>
+</div>
+
+    <h2>｜ご依頼の流れ｜</h2>
+    <ol>
+      <li>X(DM)またはメールでご連絡ください</li>
+      <li>内容確認・お見積り</li>
+      <li>ラフ提出・確認</li>
+      <li>完成・納品</li>
+      <li>お支払い</li>
+    </ol>
+
+    <h2>｜注意事項｜</h2>
+    <ul>
+      <li>無表記での使用・自作発言・二次配布は禁止</li>
+      <li>商用利用は事前にご相談ください</li>
+      <li>修正回数には制限があります</li>
+    </ul>
+
+    <h2>｜連絡先｜</h2>
+    <p>
+      X(DM)：<a href="https://x.com/igmoguiku" target="_blank">@igmoguiku</a>
+    <br>
+      メール：igmoguiku@gmail.com
+    <br>その他要相談
+    </p>
+
+<br>
+    <p>
+      最終更新日：2026/3/4
+    </p>
+
+
+    <a href="index.html" class="back">← トップへ戻る</a>
+  </div>
+</div>
+
+</body>
+</html>
